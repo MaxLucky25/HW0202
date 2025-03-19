@@ -8,7 +8,7 @@ import { commentValidators } from '../validators/commentValidators';
 
 export const commentRouter = Router();
 
-// PUT /api/comments/:commentId - обновление комментария
+//обновление комментария
 commentRouter.put('/:commentId',
     jwtAuthMiddleware,
     commentValidators,
@@ -31,7 +31,7 @@ commentRouter.put('/:commentId',
     }
 );
 
-// DELETE /api/comments/:commentId - удаление комментария
+//удаление комментария
 commentRouter.delete('/:commentId',
     jwtAuthMiddleware,
     async (req: Request, res: Response) => {
@@ -50,7 +50,7 @@ commentRouter.delete('/:commentId',
     }
 );
 
-// GET /api/comments/:id - получение комментария по id
+// получение комментария по id
 commentRouter.get('/:id', async (req: Request, res: Response) => {
     const { id } = req.params;
     const comment = await commentService.getCommentById(id);

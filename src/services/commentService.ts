@@ -9,7 +9,13 @@ export const commentService = {
         // Проверяем, существует ли пост
         const post = await postRepository.getById(postId);
         if (!post) return null;
-        return await commentRepository.create(postId, input, commentatorInfo);
+        const comment = await commentRepository.create(postId, input, commentatorInfo);
+        return {
+            id: comment.id,
+            content: comment.content,
+            commentatorInfo: comment.commentatorInfo,
+            createdAt: comment.createdAt,
+        }
     },
 
     async updateComment(commentId: string,
