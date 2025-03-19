@@ -18,7 +18,7 @@ export const postValidators = [
         .notEmpty().withMessage('Content is required'),
 
     body('blogId')
-        .notEmpty().withMessage('blogId is required')
+        .optional()
         .custom(async (value) => {
             const blog = await blogRepository.getById(value);
             if (!blog) throw new Error('Blog not found');
