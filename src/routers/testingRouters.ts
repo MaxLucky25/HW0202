@@ -2,9 +2,9 @@ import { Router } from 'express';
 import {blogCollection, commentCollection, postCollection, userCollection} from "../db/mongo-db";
 
 
-export const testingRouter = Router();
+export const testingRouters = Router();
 
-testingRouter.delete('/all-data', async (req, res) => {
+testingRouters.delete('/all-data', async (req, res) => {
     await blogCollection.deleteMany({});
     await postCollection.deleteMany({});
     await userCollection.deleteMany({});

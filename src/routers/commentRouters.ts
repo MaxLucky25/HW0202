@@ -3,6 +3,8 @@ import { jwtAuthMiddleware } from '../middlewares/jwtAuthMiddleware';
 import { inputCheckErrorsMiddleware } from '../middlewares/validationMiddleware';
 import { commentService } from '../services/commentService';
 import { commentValidators } from '../validators/commentValidators';
+import {ResultStatus} from "../models/resultModels";
+import {resultCodeToHttpStatus} from "../utility/resultMapper";
 
 
 
@@ -17,17 +19,13 @@ commentRouter.put('/:commentId',
         const { commentId } = req.params;
         const userId = req.userId!;
         const result = await commentService.updateComment(commentId, { content: req.body.content }, userId);
-        if (result.status === 204) {
-            res.sendStatus(204);
-        } else if (result.status === 403) {
-            res.sendStatus(403);
-        } else if (result.status === 404) {
-            res.sendStatus(404);
-        } else {
-            res.status(400).json({
-                errorsMessages: [{ field: 'content', message: result.error || 'Bad Request' }]
-            });
+
+        if (result.status !== ResultStatus.Success) {
+            res.status(resultCodeToHttpStatus(result.status)).json(result.extensions);
+            return;
         }
+
+        res.sendStatus(204);
     }
 );
 

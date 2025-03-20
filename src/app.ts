@@ -1,8 +1,8 @@
 import express from 'express';
 import { blogsRouter } from './routers/blogRouters';
 import { postsRouter } from './routers/postRouters';
-import { testingRouter } from './routers/testingRouter';
-import {userRouter} from "./routers/userRoutes";
+import { testingRouters } from './routers/testingRouters';
+import {userRouter} from "./routers/userRouters";
 import {authRouter} from "./routers/authRoutes";
 import cors from 'cors';
 import {commentRouter} from "./routers/commentRouters";
@@ -16,7 +16,7 @@ app.use(cors());
 
 app.use('/blogs', blogsRouter);
 app.use('/posts', postsRouter);
-app.use('/testing', testingRouter);
+app.use('/testing', testingRouters);
 app.use('/users', userRouter)
 app.use('/auth', authRouter);
 app.use('/comments', commentRouter);
