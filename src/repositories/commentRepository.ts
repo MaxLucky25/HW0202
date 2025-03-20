@@ -4,7 +4,7 @@ import { getPaginationParams } from '../utility/commonPagination';
 
 export const commentRepository = {
     async getCommentById(id: string): Promise<CommentViewModel | null> {
-        const comment = await commentCollection.findOne({ id }, { projection: { _id: 0 } });
+        const comment = await commentCollection.findOne({ id }, { projection: { _id: 0, postId: 0 } });
         return comment as CommentViewModel | null;
     },
 
@@ -51,12 +51,12 @@ export const commentRepository = {
             page: pageNumber,
             pageSize,
             totalCount,
-            items: items.map(({ _id, ...rest }) => rest) as CommentViewModel[],
+            items: items.map(({ _id, postId, ...rest }) => rest) as CommentViewModel[],
         };
     },
 
     mapToOutput(comment: CommentDBType): CommentViewModel {
-        const { _id, ...rest } = comment;
+        const { _id, postId, ...rest } = comment;
         return rest;
     },
 };
