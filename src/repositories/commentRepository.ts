@@ -56,7 +56,7 @@ export const commentRepository = {
     },
 
     mapToOutput(comment: CommentDBType): CommentViewModel {
-        const { _id, postId, ...rest } = comment;
+        const { _id, ...rest } = comment;
         return rest;
     },
 };

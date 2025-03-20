@@ -12,7 +12,7 @@ export type CommentDBType = {
     createdAt: Date;
 };
 
-export type CommentViewModel = Omit<CommentDBType, '_id' | 'postId'>;
+export type CommentViewModel = Omit<CommentDBType, '_id'>;
 
 export type CreateCommentDto = {
     content: string;
